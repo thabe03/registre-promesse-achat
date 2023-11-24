@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity=
+"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous">
+	</script>
+	
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"
+			integrity=
+"sha256-yE5LLp5HSQ/z+hJeCqkz9hdjNkk1jaiGG0tDCraumnA="
+			crossorigin="anonymous">
+	</script>
+	
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity=
+"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous">
+	</script>
+
+
+<style>
+  @media (max-width: 767px) {
+    form{
+      padding:2rem;
+    }
+    #container{
+      padding-top:4rem;
+      padding-bottom:4rem;
+    }
+  }
+  @media (min-width: 768px) {
+    input, button {
+      width:75vh !important;
+    }
+    #container{
+      height:75vh;
+      margin-top:5rem;
+    }
+  }
+  main{
+    color:var(--text2) !important;
+  }
+</style>
+<div class="d-flex flex-column justify-content-center align-items-center w-100" id="container">
+<h1 class="h1 text-center p-4">Mettre à jour le numéro de téléphone</h1>
+<form class="was-validated" action="/phone2" method="post">
+  <div class="mt-2">
+    <label for="phone_number" class="form-label">Nouveau numéro de téléphone</label>
+    <input type="text" class="form-control is-valid" name="phone_number" id="phone_number" required>
+    <div class="invalid-feedback">
+      Entrez votre nouveau numéro de téléphone
+    </div>
+  </div>
+ <div class="mt-2">
+    <label for="oldPhone" class="form-label">Numéro de téléphone actuel</label>
+    <input type="text" class="form-control is-valid" name="oldPhone" id="oldPhone" required>
+    <div class="invalid-feedback">
+      Entrez votre numéro de téléphone à changer
+    </div>
+  </div>
+  <div class="mt-2">
+    <label for="password" class="form-label">Mot de passe</label>
+    <input type="password" class="form-control is-valid" name="password" required>
+    <div class="invalid-feedback">
+      Entrez votre mot de passe
+    </div>
+  </div>
+  <div class="mt-2">
+    <button class="btn btn-primary" type="submit">Mettre à jour</button>
+  </div>
+</form>
+</div>
+
+<script>
+$(document).ready(function($){
+	$('#phone_number,#oldPhone').mask('1(000)-000-0000');
+});
+</script>
+
+{% endblock %}

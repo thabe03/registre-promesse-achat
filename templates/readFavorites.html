@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  main{
+    color:var(--text) !important;
+    overflow-y:scroll !important;
+    padding-bottom:8rem;
+  }
+  i{
+    cursor:pointer !important;
+  }
+</style>
+<ul style="list-style-type: none;width:100%;margin:0; padding:0;">
+{% for i,j,k,l,m,n,o in rows %}
+  <li>
+    <div class="d-flex flex-column w-100 bg-light p-4 my-1">
+  <a class="text-left fw-bold" style="text-decoration: none;" href="/#section{{o}}">{{i}}</a>
+  <div class="text-left fw-bold text-secondary"><a id="telephone" style="text-decoration: none;" href="tel:{{j}}"><small class="text-left fw-bold text-secondary">{{j}}</small></a>
+  <small id="price">{{k}} {{l}}</small></div>
+  <div class="text-left fw-bold">{{m}}</div>
+  <a style="text-decoration: none;" href="/deleteFavorite/{{o}}"><i class="fa fa-trash px-1 pt-4"></i></a>
+</div></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+

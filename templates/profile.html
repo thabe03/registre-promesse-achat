@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+ main * {
+        height: 25%;
+        width: 50%;   
+      }
+</style>
+<div class="d-flex flex-column justify-content-center w-100 h-100 align-items-center"><button type="button" class="btn btn-success fs-1" id="signin">S'enregistrer</button></div>
+
+<script>
+  $(document).ready(function(){
+  $("#signin").click(function(){
+    window.location.href = "/signin";
+  });
+});
+    </script>
+{% endblock %}

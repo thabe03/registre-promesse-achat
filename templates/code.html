@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  @media (max-width: 767px) {
+    .input-group {
+      width: 100% !important;
+    }
+  }
+</style>
+<div class="d-flex flex-column justify-content-center align-items-center h-100">
+<div class="display-1 text-light text-center m-5">Saisir le code à 6 chiffres</div>
+<form action="/code" method="post" class="m-5">
+    <input type="tel" maxlength="6" class="form-control form-control-lg fs-1" name="code_verification" required>
+</form>
+</div>
+
+{% endblock %}

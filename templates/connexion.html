@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  @media (max-width: 767px) {
+    .card {
+      width: 100% !important;
+      margin:1rem;
+    }
+    main {
+      overflow-y:scroll !important;
+    }
+  }
+  .list-group-item {
+    cursor:pointer !important;
+  }
+  .card{
+    margin:2rem;
+  }
+</style>
+<div class="d-flex flex-column justify-content-center align-items-center h-75 mx-2" id="container">
+<div class="card w-75">
+  <div class="card-body">
+    <h5 class="card-title">Profile</h5></div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" id="updateUser">Compte</li>
+    <li class="list-group-item" id="readPostsOwner">Mes annonces</li>
+  </ul>
+</div>
+<div class="card w-75">
+  <div class="card-body">
+    <h5 class="card-title">Informations générales</h5></div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" id="confidentiality">Confidentialité</li>
+    <li class="list-group-item" id="conditions">Conditions d’utilisation</li>
+    <li class="list-group-item" id="help">Aide</li>
+  </ul>
+</div>
+
+{% if admin == "+14505210806" %}
+<div class="card w-75">
+  <div class="card-body">
+    <h5 class="card-title">Administrateur</h5></div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" id="admin_users">Voir les utilisateurs</li>
+    <li class="list-group-item" id="admin_posts">Voir les annonces</li>
+  </ul>
+</div>
+<style>
+  @media (max-width: 767px) {
+    #container{
+      margin-top:12rem;
+      height:100vh;
+      padding-left:1rem;
+      padding-right:1rem;
+      margin-bottom:14rem;
+    }
+  }
+  @media (min-width: 768px) {
+    #container{
+      margin-top:6rem;
+      height:100vh;
+      padding-left:1rem;
+      padding-right:1rem;
+      margin-bottom:10rem;
+    }
+  }
+</style>
+{% else %}
+  <style>
+    @media (max-width: 767px) {
+    #container{
+      margin-top:5rem;
+      height:100vh;
+      padding-left:1rem;
+      padding-right:1rem;
+      margin-bottom:7rem;
+    }
+  </style>
+{% endif %}
+  
+  <div class="card w-75 text-center">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" style="color:red;" data-bs-toggle="modal" data-bs-target="#confirmation">Supprimer le compte</li>
+    <li class="list-group-item" style="color:white;background:red;"id="logout">Se déconnecter</li>
+  </ul>
+</div>
+</div>
+
+<div class="modal fade text-dark" id="confirmation" tabindex="-1" aria-labelledby="confirmationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Confirmation de suppression de compte</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sûr de vouloir supprimer votre compte ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-success" id="deleteUser">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+  $("#updateUser").click(function(){
+    window.location.href = "/updateUser";
+  });
+});
+
+    $(document).ready(function(){
+  $("#readPostsOwner").click(function(){
+    window.location.href = "/readPostsOwner";
+  });
+});
+
+  $(document).ready(function(){
+  $("#deleteUser").click(function(){
+    window.location.href = "/deleteUser";
+  });
+});
+  $(document).ready(function(){
+  $("#logout").click(function(){
+    window.location.href = "/logout";
+  });
+});
+$(document).ready(function(){
+  $("#admin_users").click(function(){
+    window.location.href = "/admin_readUsers";
+  });
+});
+  $(document).ready(function(){
+  $("#admin_posts").click(function(){
+    window.location.href = "/admin_readPosts";
+  });
+});
+    </script>
+{% endblock %}

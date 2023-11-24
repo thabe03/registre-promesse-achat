@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  main{
+    color:var(--text) !important;
+    overflow-y:scroll !important;
+    padding-bottom:8rem;
+  }
+  i{
+    cursor:pointer !important;
+  }
+  ul {
+    padding:2rem !important;
+  }
+</style>
+<ul style="list-style-type: none;width:100%;margin:0; padding:0;">
+{% for i,j,k,l,m,n in rows %}
+<li>
+<form class="d-flex flex-column w-100 bg-light p-4 my-1 rounded" action="/updatePostOwner" method="post">
+   <input type="hidden" name="idPostParameter" value="{{n}}">
+  <input type="hidden" name="adresse" value="{{i}}">
+  <label class="text-left fw-bold">{{i}}</label>
+  <div class="text-left fw-bold text-secondary">
+  <small><input name="prixAsk" value="{{j}}" type="number" required> <input name="prixPa" value="{{k}}" type="number" required></small></div>
+  <textarea class="text-left fw-bold" name="description" value="{{l}}" required>{{l}}</textarea>
+  <button type="submit" class="pt-4 text-primary" style="all: unset; margin:0;padding:0;cursor:pointer;">Enregistrer <i class="fa fa-save"></i></button>
+    <a style="text-decoration: none;" class="text-danger" href="/readPostsOwner/{{n}}">Supprimer <i class="fa fa-trash px-2 pt-4 mx-2"></i></a>
+</form></li>
+  {% endfor %}
+  </ul>
+
+{% endblock %}
+

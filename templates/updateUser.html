@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  @media (max-width: 767px) {
+    main {
+      overflow-y:scroll !important;
+      color:var(--text2) !important;
+    }
+    form{
+      padding:2rem;
+    }
+    #container{
+      padding-top:2rem;
+      padding-bottom:4rem;
+    }
+  }
+  @media (min-width: 768px) {
+    main{
+      color:var(--text2) !important;
+    }
+    input, button {
+      width:75vh !important;
+    }
+    #container{
+      height:75vh;
+      margin-top:5rem;
+    }
+  }
+</style>
+<div class="d-flex flex-column justify-content-center align-items-center w-100" id="container">
+<h1 class="h1 text-center">Mettre à jour les informations</h1>
+<form class="was-validated" action="/updateUser" method="post">
+  <div class="mt-2">
+    <label for="firstName" class="form-label">Prénom</label>
+    <input type="text" class="form-control is-valid" name="firstName" value="{{utilisateur.firstName}}" required>
+    <div class="invalid-feedback">
+      Entrez votre prénom
+    </div>
+  </div>
+ <div class="mt-2">
+    <label for="lastName" class="form-label">Nom de famille</label>
+    <input type="text" class="form-control is-valid" name="lastName" value="{{utilisateur.lastName}}" required>
+    <div class="invalid-feedback">
+      Entrez votre nom de famille
+    </div>
+  </div>
+  <div class="mt-2">
+    <label for="email" class="form-label">Courriel</label>
+    <input type="email" class="form-control is-valid" name="email" value="{{utilisateur.email}}" required>
+    <div class="invalid-feedback">
+      Entrez votre courriel
+    </div>
+  </div>
+  <div class="mt-2">
+    <label for="password" class="form-label">Mot de passe</label>
+    <input type="password" class="form-control is-valid" name="password" required>
+    <div class="invalid-feedback">
+      <a href="updatePassword">Changer le mot de passe</a>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button class="btn btn-primary" type="submit">Mettre à jour</button>
+  </div>
+</form>
+</div>
+
+{% endblock %}

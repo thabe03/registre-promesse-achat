@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  main{
+    color:var(--text) !important;
+    overflow-y:scroll !important;
+    padding-bottom:8rem;
+  }
+  i{
+    cursor:pointer !important;
+  }
+    #myUL {
+      margin-top:4rem !important;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light static fixed-top">
+  <div class="container-fluid">
+      <form class="d-flex" style="width:100%;">
+        <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Search" id="myInput" onkeyup="myFunction()">
+      </form>
+  </div>
+</nav>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("div")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+<ul id="myUL" style="list-style-type: none;width:100%;margin:0; padding:0;">
+{% for i,j,k,l,m,n,o,p in rows %}
+  <li>
+<div class="d-flex flex-column w-100 bg-light p-4 my-1" id="section{{o}}">
+  <div class="text-left fw-bold">{{i}}</div>
+  <div class="text-left fw-bold text-secondary"><a href="tel:{{j}}" style="text-decoration:none;"><small class="text-left fw-bold text-secondary">{{j}}</small></a>
+  <small id="price">{{k}} {{l}}</small></div>
+  <div class="text-left fw-bold">{{m}}</div>
+  <div class="d-flex flex-row">
+  {% if p == True %}
+  <a style="text-decoration: none;color:red;" href="/deleteFavorite/{{o}}"><i class="fa fa-heart px-1 pt-4"></i></a>
+  {% else %}
+  <a style="text-decoration: none;" href="/createFavorite/{{n}}/{{o}}"><i class="fa fa-heart px-1 pt-4"></i></a>
+  {% endif %}
+    <script>
+      function cop{{o}}() {
+        var copyText = document.getElementById("val{{o}}");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+        alert("Copier le lien : " + copyText.value);
+      }
+</script>
+    <button onclick="cop{{o}}()" style="all:initial;" class="text-primary"><i class="fa fa-share px-1 pt-4"></i></button>
+     <input style="display:none;" id="val{{o}}" value="https://stripedkeystartup.thabe03.repl.co/#section{{o}}">
+
+</div></li>
+  
+  {% endfor %}
+  </ul>
+{% endblock %}

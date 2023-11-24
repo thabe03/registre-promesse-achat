@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  main{
+    color:var(--text) !important;
+    overflow-y:scroll !important;
+    padding-bottom:8rem;
+  }
+  i{
+    cursor:pointer !important;
+  }
+</style>
+<ul style="list-style-type: none;width:100%;margin:0; padding:0;">
+{% for i,j,k,l,m,n in rows %}
+  <li>
+<div class="d-flex flex-column w-100 bg-light p-4 my-1">
+  <div class="text-left fw-bold">{{i}} {{j}}</div>
+  <div class="text-left fw-bold text-secondary"><a id="telephone" style="text-decoration: none;" href="tel:{{l}}"><small class="text-left fw-bold text-secondary">{{l}}</small></a>
+  <small>{{k}} {{m}}</small></div>
+  <a style="text-decoration: none;" href="/admin_deleteUser/{{n}}"><i class="fa fa-trash px-1 pt-4"></i></a>
+</div></li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+

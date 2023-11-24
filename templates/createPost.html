@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  @media (max-width: 767px) {
+    main {
+      overflow-y:scroll !important;
+      color:var(--text2) !important;
+    }
+    form{
+      padding:2rem;
+    }
+    #container{
+      padding-top:2rem;
+      padding-bottom:4rem;
+    }
+  }
+  @media (min-width: 768px) {
+    main{
+      color:var(--text2) !important;
+    }
+    input, button {
+      width:75vh !important;
+    }
+    #container{
+      height:75vh;
+      margin-top:5rem;
+    }
+  }
+</style>
+
+<div class="d-flex flex-column justify-content-center align-items-center w-100" id="container">
+<h1 class="h1 text-center">Créer une annonce</h1>
+<form class="was-validated" action="/createPost" method="post">
+  <div class="mt-2">
+    <label for="adresse" class="form-label">Adresse</label>
+    <input type="text" class="form-control is-valid" name="adresse" id="addressInput" placeholder="Entrez une adresse" required>
+    <div class="invalid-feedback">
+      Adresse invalide
+    </div>
+  </div>
+ <div class="mt-2">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control is-invalid" placeholder="Description requise" name="description" maxlength="150" required></textarea>
+    <div class="invalid-feedback">
+      Entrer une description brève de l'immeuble et des conditions d'achat de la promesse d'achat
+    </div>
+  </div>  
+  <div class="mt-2">
+    <label for="prixPa" class="form-label">Prix de la promesse d'achat</label>
+    <input class="form-control" name="prixPa" type="number" required>
+    <div class="invalid-feedback">
+      Vous devez entrer le prix de la promesse d'achat
+    </div>
+  </div>  
+  <div class="mt-2">
+    <label for="prixAsk" class="form-label">Prix de la bâtisse</label>
+    <input class="form-control" name="prixAsk" type="number" required>
+    <div class="invalid-feedback">
+      Vous devez entrer le prix de l'immeuble excluant le prix de la promesse d'achat
+    </div>
+  </div>  
+  <div class="mt-2">
+    <button class="btn btn-primary" type="submit">Poster</button>
+  </div>
+</form>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('#addressInput').autocomplete({
+      source: function(request, response) {
+        var base_url = 'https://nominatim.openstreetmap.org/search';
+        var params = {
+          q: request.term,
+          format: 'json',
+          addressdetails: 1,
+          limit: 5
+        };
+
+        $.getJSON(base_url, params, function(data) {
+          response($.map(data, function(item) {return item.display_name;}));
+        });
+      },
+      minLength: 0
+    });
+  });
+</script>
+{% endblock %}
